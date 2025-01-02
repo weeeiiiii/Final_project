@@ -41,6 +41,42 @@ void init_game() {
     }
 }
 
+void button_clicked(GtkButton *button, gpointer data) {
+    int pos = GPOINTER_TO_INT(data);
+    int row = pos / 3;
+    int col = pos % 3;
+
+    if (game.map[row][col] == 0) return;
+
+    for (int i = 0; i < 7; i++) {
+        if (game.store[i] == 0) {
+            game.store[i] = game.map[row][col];
+            char filename[32];
+            sprintf(filename, "C:/Users/wei/Desktop/sheepppp/gtk/images/item%d.png", game.store[i]);
+            GtkWidget *image = gtk_image_new_from_file(filename);
+            gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), image);
+            break;
+        }
+    }
+
+    int count = 0;
+    for (int i = 0; i < 7; i++) {
+        if (game.store[i] == game.map[row][col]) count++;
+    }
+
+    if (count == 3) {
+        for (int i = 0; i < 7; i++) {
+            if (game.store[i] == game.map[row][col]) {
+                game.store[i] = 0;
+                gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), NULL);
+            }
+        }
+    }
+
+    game.map[row][col] = 0;
+    gtk_button_set_child(GTK_BUTTON(game.buttons[row][col]), NULL);
+}
+
 void app_activate(GtkApplication *app, gpointer user_data) {
     game.window = gtk_application_window_new(app);
     gtk_window_set_title(GTK_WINDOW(game.window), "Match-3 Game");
@@ -87,41 +123,7 @@ void app_activate(GtkApplication *app, gpointer user_data) {
     gtk_window_present(GTK_WINDOW(game.window));
 }
 
-void button_clicked(GtkButton *button, gpointer data) {
-    int pos = GPOINTER_TO_INT(data);
-    int row = pos / 3;
-    int col = pos % 3;
 
-    if (game.map[row][col] == 0) return;
-
-    for (int i = 0; i < 7; i++) {
-        if (game.store[i] == 0) {
-            game.store[i] = game.map[row][col];
-            char filename[32];
-            sprintf(filename, "C:/Users/wei/Desktop/sheepppp/gtk/images/item%d.png", game.store[i]);
-            GtkWidget *image = gtk_image_new_from_file(filename);
-            gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), image);
-            break;
-        }
-    }
-
-    int count = 0;
-    for (int i = 0; i < 7; i++) {
-        if (game.store[i] == game.map[row][col]) count++;
-    }
-
-    if (count == 3) {
-        for (int i = 0; i < 7; i++) {
-            if (game.store[i] == game.map[row][col]) {
-                game.store[i] = 0;
-                gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), NULL);
-            }
-        }
-    }
-
-    game.map[row][col] = 0;
-    gtk_button_set_child(GTK_BUTTON(game.buttons[row][col]), NULL);
-}
 
 int main(void) {
    GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);

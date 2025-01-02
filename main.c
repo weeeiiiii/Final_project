@@ -3,17 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #define WIDTH 500
 #define HEIGHT 1000
 #define INTERVAL 48
 #define TILE_SIZE 48
 
-=======
->>>>>>> f92a9ef (button)
-=======
->>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 typedef struct {
     GtkWidget *window;
     GtkWidget *grid;
@@ -23,9 +17,6 @@ typedef struct {
     int store[7];
 } GameState;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 GameState game;
 
 void init_game() {
@@ -49,10 +40,6 @@ void init_game() {
         game.store[i] = 0;
     }
 }
-
-=======
->>>>>>> a6ecff93e60bb404e815798104dd479fe15481c1
-static GameState game;
 
 void app_activate(GtkApplication *app, gpointer user_data) {
     game.window = gtk_application_window_new(app);
@@ -98,12 +85,9 @@ void app_activate(GtkApplication *app, gpointer user_data) {
     }
 
     gtk_window_present(GTK_WINDOW(game.window));
-=======
-=======
->>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
-GameState game;
+}
 
-static void button_clicked(GtkButton *button, gpointer data) {
+void button_clicked(GtkButton *button, gpointer data) {
     int pos = GPOINTER_TO_INT(data);
     int row = pos / 3;
     int col = pos % 3;
@@ -137,12 +121,7 @@ static void button_clicked(GtkButton *button, gpointer data) {
 
     game.map[row][col] = 0;
     gtk_button_set_child(GTK_BUTTON(game.buttons[row][col]), NULL);
-<<<<<<< HEAD
->>>>>>> f92a9ef (button)
-=======
->>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 }
-
 
 int main(void) {
    GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);

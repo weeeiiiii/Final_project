@@ -3,11 +3,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #define WIDTH 500
 #define HEIGHT 1000
 #define INTERVAL 48
 #define TILE_SIZE 48
 
+=======
+>>>>>>> f92a9ef (button)
+=======
+>>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 typedef struct {
     GtkWidget *window;
     GtkWidget *grid;
@@ -17,6 +23,8 @@ typedef struct {
     int store[7];
 } GameState;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 GameState game;
 
@@ -90,6 +98,49 @@ void app_activate(GtkApplication *app, gpointer user_data) {
     }
 
     gtk_window_present(GTK_WINDOW(game.window));
+=======
+=======
+>>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
+GameState game;
+
+static void button_clicked(GtkButton *button, gpointer data) {
+    int pos = GPOINTER_TO_INT(data);
+    int row = pos / 3;
+    int col = pos % 3;
+
+    if (game.map[row][col] == 0) return;
+
+    for (int i = 0; i < 7; i++) {
+        if (game.store[i] == 0) {
+            game.store[i] = game.map[row][col];
+            char filename[32];
+            sprintf(filename, "C:/Users/wei/Desktop/sheepppp/gtk/images/item%d.png", game.store[i]);
+            GtkWidget *image = gtk_image_new_from_file(filename);
+            gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), image);
+            break;
+        }
+    }
+
+    int count = 0;
+    for (int i = 0; i < 7; i++) {
+        if (game.store[i] == game.map[row][col]) count++;
+    }
+
+    if (count == 3) {
+        for (int i = 0; i < 7; i++) {
+            if (game.store[i] == game.map[row][col]) {
+                game.store[i] = 0;
+                gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), NULL);
+            }
+        }
+    }
+
+    game.map[row][col] = 0;
+    gtk_button_set_child(GTK_BUTTON(game.buttons[row][col]), NULL);
+<<<<<<< HEAD
+>>>>>>> f92a9ef (button)
+=======
+>>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 }
 
 

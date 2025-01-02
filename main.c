@@ -17,6 +17,7 @@ typedef struct {
     int store[7];
 } GameState;
 
+<<<<<<< HEAD
 GameState game;
 
 void init_game() {
@@ -41,6 +42,8 @@ void init_game() {
     }
 }
 
+=======
+>>>>>>> a6ecff93e60bb404e815798104dd479fe15481c1
 static GameState game;
 
 void app_activate(GtkApplication *app, gpointer user_data) {

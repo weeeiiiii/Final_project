@@ -17,9 +17,9 @@ typedef struct {
     int store[7];
 } GameState;
 
-static GameState game;
+GameState game;
 
-static void init_game() {
+void init_game() {
     for (int r = 0; r < 3; r++) {
         for (int c = 0; c < 3; c++) {
             game.map[r][c] = r + 1;
@@ -51,7 +51,7 @@ static void button_clicked(GtkButton *button, gpointer data) {
     for (int i = 0; i < 7; i++) {
         if (game.store[i] == 0) {
             game.store[i] = game.map[row][col];
-            char filename[32];
+            char filename[64];
             sprintf(filename, "C:/Users/wei/Desktop/sheepppp/gtk/images/item%d.png", game.store[i]);
             GtkWidget *image = gtk_image_new_from_file(filename);
             gtk_button_set_child(GTK_BUTTON(game.store_buttons[i]), image);
@@ -77,7 +77,7 @@ static void button_clicked(GtkButton *button, gpointer data) {
     gtk_button_set_child(GTK_BUTTON(game.buttons[row][col]), NULL);
 }
 
-static void app_activate(GtkApplication *app, gpointer user_data) {
+void app_activate(GtkApplication *app) {
     // 創建主窗口
     game.window = gtk_application_window_new(app);
     gtk_window_set_title(GTK_WINDOW(game.window), "sheepNsheep");
@@ -130,7 +130,7 @@ static void app_activate(GtkApplication *app, gpointer user_data) {
             gtk_widget_set_halign(game.buttons[r][c], GTK_ALIGN_CENTER);
             gtk_widget_set_valign(game.buttons[r][c], GTK_ALIGN_CENTER);
 
-            char filename[32];
+            char filename[64];
             sprintf(filename, "C:/Users/wei/Desktop/sheepppp/gtk/images/item%d.png", game.map[r][c]);
             GtkWidget *image = gtk_image_new_from_file(filename);
             gtk_image_set_pixel_size(GTK_IMAGE(image), TILE_SIZE);
@@ -166,7 +166,7 @@ static void app_activate(GtkApplication *app, gpointer user_data) {
     gtk_window_present(GTK_WINDOW(game.window));
 }
 int main(void) {
-    GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+    GtkApplication *app = gtk_application_new("org.gtk.sheepNsheep", G_APPLICATION_DEFAULT_FLAGS);
     g_signal_connect(app, "activate", G_CALLBACK(app_activate), NULL);
     int status = g_application_run(G_APPLICATION(app), 0, NULL);
     g_object_unref(app);

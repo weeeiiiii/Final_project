@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WIDTH 500
 #define HEIGHT 1000
 #define INTERVAL 48
@@ -11,6 +12,8 @@
 
 =======
 >>>>>>> f92a9ef (button)
+=======
+>>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 typedef struct {
     GtkWidget *window;
     GtkWidget *grid;
@@ -20,6 +23,7 @@ typedef struct {
     int store[7];
 } GameState;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 GameState game;
@@ -95,6 +99,8 @@ void app_activate(GtkApplication *app, gpointer user_data) {
 
     gtk_window_present(GTK_WINDOW(game.window));
 =======
+=======
+>>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 GameState game;
 
 static void button_clicked(GtkButton *button, gpointer data) {
@@ -131,7 +137,10 @@ static void button_clicked(GtkButton *button, gpointer data) {
 
     game.map[row][col] = 0;
     gtk_button_set_child(GTK_BUTTON(game.buttons[row][col]), NULL);
+<<<<<<< HEAD
 >>>>>>> f92a9ef (button)
+=======
+>>>>>>> f92a9efb065658d5561dd3fa063387d4fc6cb1a4
 }
 
 
